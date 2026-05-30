@@ -1055,11 +1055,17 @@ self.addEventListener('activate', (event) => {
 
 ```bash
 # Create 96x96 icons for each shortcut
-for shortcut in new dashboard settings search; do
-  sharp public/icons/icon-source.png \
-    --resize 96 96 \
-    -o public/icons/shortcut-${shortcut}.png
-done
+# scripts/generate-shortcut-icons.mjs
+import sharp from 'sharp'
+
+const shortcuts = ['new', 'dashboard', 'settings', 'search']
+for (const name of shortcuts) {
+  await sharp('public/icons/icon-source.png')
+    .resize(96, 96)
+    .png()
+    .toFile(`public/icons/shortcut-${name}.png`)
+  console.log(`Generated shortcut-${name}.png`)
+}
 ```
 
 ---

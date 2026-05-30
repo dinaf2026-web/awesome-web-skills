@@ -546,7 +546,7 @@ export function ImageSequence({ frameCount = FRAME_COUNT }: ImageSequenceProps) 
 'use client'
 
 import { useRef } from 'react'
-import { useScroll, useTransform, motion } from 'framer-motion'
+import { useScroll, useTransform, motion, MotionValue } from 'framer-motion'
 
 interface ImageSwapProps {
   frames: string[] // array of image URLs
@@ -566,22 +566,35 @@ export function ImageSwap({ frames }: ImageSwapProps) {
     [0, frames.length - 1],
   )
 
+  // Derive a rounded integer MotionValue for frame comparison
+  const currentFrame = useTransform(frameIndex, (v) => Math.round(v))
+
   return (
     <div ref={ref} style={{ height: `${frames.length * 80}vh` }}>
       <div className="sticky top-0 flex h-screen items-center justify-center">
         {frames.map((src, i) => (
-          <motion.img
-            key={src}
-            src={src}
-            alt={`Frame ${i + 1}`}
-            className="absolute h-full w-full object-cover"
-            style={{
-              opacity: frameIndex.get() === i ? 1 : 0,
-            }}
-          />
+          <FrameImage key={src} src={src} index={i} currentFrame={currentFrame} />
         ))}
       </div>
     </div>
+  )
+}
+
+interface FrameImageProps {
+  src: string
+  index: number
+  currentFrame: MotionValue<number>
+}
+
+function FrameImage({ src, index, currentFrame }: FrameImageProps) {
+  const opacity = useTransform(currentFrame, (v) => (v === index ? 1 : 0))
+  return (
+    <motion.img
+      src={src}
+      alt={`Frame ${index + 1}`}
+      className="absolute h-full w-full object-cover"
+      style={{ opacity }}
+    />
   )
 }
 ```

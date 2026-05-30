@@ -216,6 +216,7 @@ interface FormFieldProps {
   children: (props: {
     id: string
     errorId: string
+    hintId: string
     hasError: boolean
   }) => React.ReactNode
 }
@@ -347,7 +348,7 @@ export function ContactForm() {
         hint="Minimum 10 characters"
         required
       >
-        {({ id, errorId, hintId, hasError }: any) => (
+        {({ id, errorId, hintId, hasError }) => (
           <div className="relative">
             <Textarea
               id={id}
@@ -559,7 +560,7 @@ export function ServerActionForm() {
 "use client"
 
 import { useState } from "react"
-import { useForm, FormProvider } from "react-hook-form"
+import { useForm, FormProvider, useFormContext } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { z } from "zod"
 import { Button } from "@/components/ui/button"
@@ -733,9 +734,6 @@ function Step3() {
     </fieldset>
   )
 }
-
-// Import at top; using inline here for brevity
-import { useFormContext } from "react-hook-form"
 
 const STEP_COMPONENTS = [Step1, Step2, Step3]
 

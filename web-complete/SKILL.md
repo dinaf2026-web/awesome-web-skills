@@ -30,7 +30,7 @@ This skill is the hub for all 14 web development sub-skills organized across thr
 |---|---|---|
 | web-copywriting | Conversion-first copy patterns | You're writing headlines, CTAs, value props, or pricing copy |
 | web-forms | Accessible, validated forms | You need inputs, multi-step flows, or server-side validation |
-| web-gsap | GSAP animation system | You want timeline-driven, scroll-triggered, or SVG animations |
+| web-animations-gsap | GSAP animation system | You want timeline-driven, scroll-triggered, or SVG animations |
 | web-scrollytelling | Scroll-driven narrative UI | You're building a story section pinned to scroll progress |
 | web-micro-interactions | Hover, focus, feedback states | Buttons, toggles, loaders, skeleton screens need polish |
 | web-auth | Authentication flows | Login, signup, OAuth, session management, protected routes |
@@ -85,7 +85,7 @@ See `web-forms` for full patterns: fieldset grouping, ARIA live regions, file up
 
 ---
 
-### web-gsap
+### web-animations-gsap
 
 **Goal:** Timeline-driven animations with scroll integration.
 
@@ -100,7 +100,7 @@ See `web-forms` for full patterns: fieldset grouping, ARIA live regions, file up
 3. **Stagger from center**
    For grid reveals, `stagger: { from: "center", amount: 0.6 }` reads more intentional than sequential stagger. Combine with `autoAlpha` (not `opacity`) so hidden elements don't take up interaction area.
 
-See `web-gsap` for full patterns: SVG path drawing, morphing, flip animations, and matchMedia for reduced-motion.
+See `web-animations-gsap` for full patterns: SVG path drawing, morphing, flip animations, and matchMedia for reduced-motion.
 
 ---
 
@@ -324,7 +324,7 @@ See `web-i18n` for full patterns: next-intl / i18next / Paraglide setup, plurali
 
 ### Landing page (marketing, SaaS, product)
 
-**Required:** web-copywriting, web-forms, web-gsap, web-micro-interactions, web-og-images, web-analytics, web-email-capture
+**Required:** web-copywriting, web-forms, web-animations-gsap, web-micro-interactions, web-og-images, web-analytics, web-email-capture
 
 **Optional:** web-scrollytelling (hero story section), web-i18n (multi-market)
 
@@ -338,7 +338,7 @@ See `web-i18n` for full patterns: next-intl / i18next / Paraglide setup, plurali
 
 **Optional:** web-i18n (if selling internationally), web-og-images (if user-shareable content), web-email-capture (for in-app upsell)
 
-**Skip:** web-scrollytelling, web-gsap (unless you have a marketing page attached)
+**Skip:** web-scrollytelling, web-animations-gsap (unless you have a marketing page attached)
 
 ---
 
@@ -354,7 +354,7 @@ See `web-i18n` for full patterns: next-intl / i18next / Paraglide setup, plurali
 
 ### Portfolio / creative site
 
-**Required:** web-gsap, web-scrollytelling, web-micro-interactions, web-og-images, web-copywriting
+**Required:** web-animations-gsap, web-scrollytelling, web-micro-interactions, web-og-images, web-copywriting
 
 **Optional:** web-forms (contact form), web-analytics (lightweight — Plausible)
 
@@ -376,6 +376,6 @@ See `web-i18n` for full patterns: next-intl / i18next / Paraglide setup, plurali
 
 - **ui-ux-pro-max** — Design system patterns, component hierarchy, and UX decision frameworks. Use this when you need to design before you build.
 - **frontend-design-direction** — Visual direction setting: choosing a style, building a palette, typography pairing. Use this before writing any CSS.
-- **motion-advanced** — Deep GSAP, Framer Motion, and CSS animation patterns beyond what web-gsap covers. Use for complex timeline choreography or physics-based motion.
+- **motion-advanced** — Deep GSAP, Framer Motion, and CSS animation patterns beyond what web-animations-gsap covers. Use for complex timeline choreography or physics-based motion.
 - **remotion-video-creation** — Programmatic video generation with React. Use when you need rendered video exports, not just in-browser animation.
 - **awesome-websites** — Curated references and teardowns of exceptional web work. Use for inspiration and benchmarking before starting a high-polish project.

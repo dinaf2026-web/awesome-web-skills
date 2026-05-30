@@ -779,6 +779,43 @@ export async function sendLeadMagnet({
 }
 ```
 
+```ts
+// lib/send-lead-magnet-confirm.ts
+import { render } from '@react-email/render'
+import { resend } from './resend'
+import { WelcomeEmail } from '@/emails/WelcomeEmail'
+
+export async function sendLeadMagnetConfirm({
+  to,
+  firstName,
+  magnetTitle,
+  token,
+}: {
+  to: string
+  firstName: string
+  magnetTitle: string
+  token: string
+}) {
+  const confirmUrl = `${process.env.NEXT_PUBLIC_BASE_URL}/confirm?token=${token}&magnet=${encodeURIComponent(magnetTitle)}`
+  const unsubscribeUrl = `${process.env.NEXT_PUBLIC_BASE_URL}/unsubscribe?email=${encodeURIComponent(to)}`
+
+  const html = await render(
+    WelcomeEmail({ firstName, confirmUrl, unsubscribeUrl }) as React.ReactElement
+  )
+
+  return resend.emails.send({
+    from: `${process.env.RESEND_FROM_NAME} <${process.env.RESEND_FROM_EMAIL}>`,
+    to,
+    subject: `Confirm your email to get ${magnetTitle}`,
+    html,
+    headers: {
+      'List-Unsubscribe': `<${unsubscribeUrl}>`,
+      'List-Unsubscribe-Post': 'List-Unsubscribe=One-Click',
+    },
+  })
+}
+```
+
 ```tsx
 // emails/LeadMagnetEmail.tsx
 import { Body, Button, Container, Head, Html, Preview, Text } from '@react-email/components'
@@ -1031,6 +1068,22 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
+import { SubscribeForm } from './SubscribeForm'
+
+const SUPPRESS_KEY = 'scroll_popup_dismissed'
+const SUPPRESS_DAYS = 7
+
+function isSuppressed(): boolean {
+  if (typeof window === 'undefined') return false
+  const val = localStorage.getItem(SUPPRESS_KEY)
+  if (!val) return false
+  return Date.now() < parseInt(val, 10)
+}
+
+function suppress() {
+  const expiry = Date.now() + SUPPRESS_DAYS * 24 * 60 * 60 * 1000
+  localStorage.setItem(SUPPRESS_KEY, String(expiry))
+}
 
 export function ScrollDepthPopup({ threshold = 0.6 }: { threshold?: number }) {
   const [open, setOpen] = useState(false)
@@ -1052,9 +1105,36 @@ export function ScrollDepthPopup({ threshold = 0.6 }: { threshold?: number }) {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [threshold])
 
-  // Same modal rendering as ExitIntentPopup
   if (!open) return null
-  return <div>/* modal */</div>
+
+  return (
+    <div
+      role="dialog"
+      aria-modal="true"
+      aria-label="Newsletter signup"
+      className="fixed inset-0 z-50 flex items-center justify-center p-4"
+    >
+      <div
+        className="absolute inset-0 bg-black/50"
+        onClick={() => { suppress(); setOpen(false) }}
+        aria-hidden="true"
+      />
+      <div className="relative z-10 w-full max-w-md rounded-xl bg-white p-8 shadow-2xl">
+        <button
+          onClick={() => { suppress(); setOpen(false) }}
+          className="absolute right-4 top-4 text-gray-400 hover:text-gray-600"
+          aria-label="Close"
+        >
+          ✕
+        </button>
+        <h2 className="mb-2 text-xl font-bold text-gray-900">Enjoying this?</h2>
+        <p className="mb-6 text-sm text-gray-600">
+          Get our best content delivered weekly. No spam.
+        </p>
+        <SubscribeForm source="scroll-depth-popup" />
+      </div>
+    </div>
+  )
 }
 ```
 
