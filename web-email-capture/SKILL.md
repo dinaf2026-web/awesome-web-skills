@@ -1028,7 +1028,7 @@ export function ExitIntentPopup() {
           className="absolute right-4 top-4 text-gray-400 hover:text-gray-600"
           aria-label="Close"
         >
-          x
+          ✕
         </button>
 
         <h2 className="mb-2 text-xl font-bold text-gray-900">

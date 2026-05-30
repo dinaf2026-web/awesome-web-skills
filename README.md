@@ -1,6 +1,6 @@
 # awesome-web-skills — Claude Code Skill Suite
 
-14 production-ready Claude Code skills for building modern websites. Install one or all.
+15 production-ready Claude Code skills for building modern websites. Install one or all.
 
 ## Skills Included
 

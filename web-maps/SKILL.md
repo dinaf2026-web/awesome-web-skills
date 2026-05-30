@@ -1,4 +1,11 @@
-﻿# web-maps Skill
+﻿---
+name: web-maps
+description: Interactive map integration for web apps — provider selection, setup, markers, location search, geolocation, GeoJSON layers, clustering, geo-filtering, routing, and performance patterns for Mapbox GL JS, Leaflet, and Google Maps.
+origin: community
+tags: [maps, mapbox, leaflet, google-maps, geolocation, clustering, geojson, routing]
+---
+
+# web-maps
 
 Interactive map integration for web apps — provider selection, setup, markers, search, geolocation, GeoJSON layers, clustering, geo-filtering, routing, mobile, and performance.
 
