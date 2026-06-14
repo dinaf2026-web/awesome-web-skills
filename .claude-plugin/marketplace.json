@@ -1,0 +1,13 @@
+{
+  "name": "dina-skills",
+  "owner": {
+    "name": "Dina Farhat"
+  },
+  "plugins": [
+    {
+      "name": "awesome-web-skills",
+      "source": "./",
+      "description": "15 production-ready Claude skills for modern web development \u2014 analytics, auth, animations, forms, PWA, i18n, maps, real-time, scrollytelling, and more."
+    }
+  ]
+}

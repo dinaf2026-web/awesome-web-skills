@@ -1,0 +1,15 @@
+{
+  "name": "awesome-web-skills",
+  "version": "0.1.0",
+  "description": "15 production-ready Claude skills for modern web development \u2014 analytics, auth, animations, forms, PWA, i18n, maps, real-time, scrollytelling, and more.",
+  "author": {
+    "name": "Dina Farhat"
+  },
+  "homepage": "https://github.com/dinaf2026-web/awesome-web-skills",
+  "repository": "https://github.com/dinaf2026-web/awesome-web-skills",
+  "license": "MIT",
+  "keywords": [
+    "claude",
+    "skills"
+  ]
+}
